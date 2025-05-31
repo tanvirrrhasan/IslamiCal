@@ -1,0 +1,226 @@
+:root {
+    --primary-color: #065f46;
+    --secondary-color: #047857;
+    --accent-color: #f0fdf4;
+    --text-color: #1f2937;
+    --bg-color: #f0fdf4;
+    --card-bg: #ffffff;
+    --hover-color: #d1fae5;
+    --border-color: #065f46;
+}
+
+:root.dark {
+    --primary-color: #34d399;
+    --secondary-color: #10b981;
+    --accent-color: #064e3b;
+    --text-color: #f3f4f6;
+    --bg-color: #111827;
+    --card-bg: #1f2937;
+    --hover-color: #374151;
+    --border-color: #34d399;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.arabic-font {
+    font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+}
+
+.bengali-font {
+    font-family: 'Noto Sans Bengali', sans-serif;
+}
+
+/* Language Selector Styles */
+.language-selector {
+    position: relative;
+    display: inline-block;
+}
+
+#langDropdown {
+    min-width: 150px;
+    z-index: 1000;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.lang-option {
+    transition: background-color 0.2s;
+    color: var(--text-color);
+}
+
+.lang-option:hover {
+    background-color: var(--hover-color);
+}
+
+/* RTL Support for Arabic */
+[lang="ar"] {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Font Classes for Different Languages */
+[lang="en"] {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+[lang="bn"] {
+    font-family: 'Noto Sans Bengali', sans-serif;
+}
+
+[lang="ar"] {
+    font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+}
+
+/* Card Styles */
+.event-card {
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(6, 95, 70, 0.1);
+}
+
+.event-card h3 {
+    color: var(--primary-color);
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.event-card h4 {
+    color: var(--primary-color);
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.event-card p {
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Historical Events Container */
+.historical-events {
+    background-color: var(--card-bg);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    padding: 1.5rem;
+}
+
+.historical-events h2 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bg-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+    border-radius: 4px;
+}
+
+/* Loading Animation */
+.loading-spinner {
+    color: var(--primary-color);
+}
+
+/* Theme Toggle Button */
+#themeToggle {
+    position: relative;
+    overflow: hidden;
+}
+
+#themeToggle .moon-icon,
+#themeToggle .sun-icon {
+    transition: transform 0.3s ease;
+}
+
+.dark #themeToggle .moon-icon {
+    display: block;
+}
+
+.dark #themeToggle .sun-icon {
+    display: none;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Islamic Pattern Background */
+.bg-pattern {
+    background-image: url('data:image/svg+xml,<svg width="40" height="40" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M20 0L40 20L20 40L0 20L20 0z" fill="%23f0fdf4"/></svg>');
+    background-size: 20px 20px;
+}
+
+/* Card Hover Effects */
+.historical-events .event-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.historical-events .event-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(6, 95, 70, 0.1);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Loading Animation */
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
+
+.loading-spinner {
+    animation: pulse 1.5s infinite;
+}
+
+/* Decorative Elements */
+.islamic-border {
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    background-image: linear-gradient(45deg, var(--accent-color) 25%, transparent 25%),
+                      linear-gradient(-45deg, var(--accent-color) 25%, transparent 25%),
+                      linear-gradient(45deg, transparent 75%, var(--accent-color) 75%),
+                      linear-gradient(-45deg, transparent 75%, var(--accent-color) 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .date-display {
+        grid-template-columns: 1fr;
+    }
+    
+    h1 {
+        font-size: 2rem;
+    }
+} 

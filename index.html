@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IslamiCal - Islamic Historical Events</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="container mx-auto px-4">
+        <header class="text-center py-8">
+            <div class="flex justify-end mb-4 space-x-4">
+                <a href="date-convert/date-convert.html" class="p-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
+                    Date Converter
+                </a>
+                <div class="language-selector">
+                    <button id="langBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        <span class="current-lang">English</span>
+                        <span class="ml-2">▼</span>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute mt-2 bg-gray-800 rounded-lg shadow-lg">
+                        <button class="lang-option block w-full text-left px-4 py-2 hover:bg-gray-700 text-gray-200" data-lang="en">English</button>
+                        <button class="lang-option block w-full text-left px-4 py-2 hover:bg-gray-700 text-gray-200" data-lang="bn">বাংলা</button>
+                        <button class="lang-option block w-full text-left px-4 py-2 hover:bg-gray-700 text-gray-200" data-lang="ar">العربية</button>
+                    </div>
+                </div>
+            </div>
+            <h1 class="text-4xl font-bold text-emerald-400 arabic-font">IslamiCal</h1>
+            <p class="text-emerald-300 mt-2" data-i18n="subtitle">Discover Islamic History Through Time</p>
+        </header>
+
+        <main class="max-w-4xl mx-auto">
+            <!-- Date Selection Section -->
+            <div class="bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+                <h2 class="text-xl font-semibold text-emerald-400 mb-4" data-i18n="select-date">Select Date to Search</h2>
+                <div class="flex flex-wrap gap-2">
+                    <div class="flex-1 min-w-[80px]">
+                        <label for="searchDay" class="block text-xs font-medium text-gray-300 mb-1" data-i18n="day">Day</label>
+                        <select id="searchDay" class="w-full p-1 text-sm border border-gray-600 rounded-lg bg-gray-700 text-gray-100">
+                            <!-- Days will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="flex-1 min-w-[80px]">
+                        <label for="searchMonth" class="block text-xs font-medium text-gray-300 mb-1" data-i18n="month">Month</label>
+                        <select id="searchMonth" class="w-full p-1 text-sm border border-gray-600 rounded-lg bg-gray-700 text-gray-100">
+                            <!-- Months will be populated by JavaScript -->
+                        </select>
+                    </div>
+                    <div class="flex-1 min-w-[80px]">
+                        <label for="searchYear" class="block text-xs font-medium text-gray-300 mb-1" data-i18n="year">Year</label>
+                        <select id="searchYear" class="w-full p-1 text-sm border border-gray-600 rounded-lg bg-gray-700 text-gray-100">
+                            <!-- Years will be populated by JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                <div class="mt-4 flex justify-center">
+                    <button id="searchButton" class="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg transition-colors" data-i18n="search">Search Events</button>
+                </div>
+                <div class="mt-2 flex justify-center">
+                    <button id="backToTodayButton" class="hidden bg-gray-600 hover:bg-gray-700 text-white px-6 py-2 rounded-lg transition-colors text-sm" data-i18n="backToToday">Back to Today</button>
+                </div>
+            </div>
+
+            <div class="bg-gray-800 rounded-lg shadow-lg p-4 mb-8">
+                <div class="date-display grid grid-cols-2 gap-2 text-center">
+                    <div class="gregorian-date">
+                        <h2 class="text-base font-semibold text-emerald-400" data-i18n="gregorian">Gregorian Date</h2>
+                        <p id="gregorian-date" class="text-lg mt-1 text-gray-200"></p>
+                    </div>
+                    <div class="hijri-date">
+                        <h2 class="text-base font-semibold text-emerald-400" data-i18n="hijri">Hijri Date</h2>
+                        <p id="hijri-date" class="text-lg mt-1 arabic-font text-gray-200"></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="historical-events bg-gray-800 rounded-lg shadow-lg p-6">
+                <h2 class="text-2xl font-bold text-emerald-400 mb-4" data-i18n="events">Historical Events on This Day</h2>
+                <div id="events-container" class="space-y-4">
+                    <div class="loading-spinner text-center" id="loading">
+                        <div class="animate-spin rounded-full h-12 w-12 border-b-2 border-emerald-400 mx-auto"></div>
+                        <p class="mt-4 text-emerald-300" data-i18n="loading">Discovering historical events...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center py-8 text-emerald-400">
+            <p>&copy; 2024 IslamiCal - All rights reserved</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+    <script>
+        function updateDateDisplay() {
+            const today = new Date();
+            const hijriDate = new Intl.DateTimeFormat('bn-u-ca-islamic', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            }).format(today);
+            
+            const gregorianDate = new Intl.DateTimeFormat('bn', {
+                weekday: 'long',
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            }).format(today);
+
+            document.getElementById('gregorian-date').textContent = gregorianDate;
+            document.getElementById('hijri-date').textContent = hijriDate.replace(' যুগ', '');
+        }
+    </script>
+</body>
+</html> 

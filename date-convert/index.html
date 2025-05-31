@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Converter - IslamiCal</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-emerald-50 dark:bg-gray-900 transition-colors duration-200">
+    <div class="container mx-auto px-4">
+        <header class="text-center py-8">
+            <div class="flex justify-end mb-4 space-x-4">
+                <a href="../index.html" class="p-2 rounded-lg bg-emerald-600 dark:bg-emerald-500 text-white hover:bg-emerald-700 dark:hover:bg-emerald-600 transition-colors">
+                    Back to Home
+                </a>
+                <button id="themeToggle" class="p-2 rounded-lg bg-emerald-600 dark:bg-emerald-500 text-white hover:bg-emerald-700 dark:hover:bg-emerald-600 transition-colors">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path class="moon-icon hidden" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"/>
+                        <path class="sun-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                    </svg>
+                </button>
+                <div class="language-selector">
+                    <button id="langBtn" class="bg-emerald-600 dark:bg-emerald-500 text-white px-4 py-2 rounded-lg hover:bg-emerald-700 dark:hover:bg-emerald-600 transition-colors">
+                        <span class="current-lang">English</span>
+                        <span class="ml-2">▼</span>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute mt-2 bg-white dark:bg-gray-800 rounded-lg shadow-lg">
+                        <button class="lang-option block w-full text-left px-4 py-2 hover:bg-emerald-50 dark:hover:bg-gray-700 dark:text-gray-200" data-lang="en">English</button>
+                        <button class="lang-option block w-full text-left px-4 py-2 hover:bg-emerald-50 dark:hover:bg-gray-700 dark:text-gray-200" data-lang="bn">বাংলা</button>
+                        <button class="lang-option block w-full text-left px-4 py-2 hover:bg-emerald-50 dark:hover:bg-gray-700 dark:text-gray-200" data-lang="ar">العربية</button>
+                    </div>
+                </div>
+            </div>
+            <h1 class="text-4xl font-bold text-emerald-800 dark:text-emerald-400 arabic-font">Date Converter</h1>
+            <p class="text-emerald-600 dark:text-emerald-300 mt-2" data-i18n="subtitle">Convert between Gregorian and Hijri dates</p>
+        </header>
+
+        <main class="max-w-4xl mx-auto">
+            <div class="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Gregorian to Hijri -->
+                    <div class="converter-section">
+                        <h2 class="text-xl font-semibold text-emerald-700 dark:text-emerald-400 mb-4" data-i18n="gregorian-to-hijri">Gregorian to Hijri</h2>
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label for="gregorianDay" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="day">Day</label>
+                                <input type="number" id="gregorianDay" min="1" max="31" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            </div>
+                            <div>
+                                <label for="gregorianMonth" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="month">Month</label>
+                                <select id="gregorianMonth" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    <option value="1">January</option>
+                                    <option value="2">February</option>
+                                    <option value="3">March</option>
+                                    <option value="4">April</option>
+                                    <option value="5">May</option>
+                                    <option value="6">June</option>
+                                    <option value="7">July</option>
+                                    <option value="8">August</option>
+                                    <option value="9">September</option>
+                                    <option value="10">October</option>
+                                    <option value="11">November</option>
+                                    <option value="12">December</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="gregorianYear" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="year">Year</label>
+                                <input type="number" id="gregorianYear" min="1900" max="2100" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            </div>
+                        </div>
+                        <button id="convertToHijri" class="w-full bg-emerald-600 dark:bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-700 dark:hover:bg-emerald-600 transition-colors" data-i18n="convert">Convert</button>
+                        <div id="hijriResult" class="mt-4 p-4 bg-emerald-50 dark:bg-gray-700 rounded-lg hidden">
+                            <p class="text-center text-lg font-semibold text-emerald-800 dark:text-emerald-400"></p>
+                        </div>
+                    </div>
+
+                    <!-- Hijri to Gregorian -->
+                    <div class="converter-section">
+                        <h2 class="text-xl font-semibold text-emerald-700 dark:text-emerald-400 mb-4" data-i18n="hijri-to-gregorian">Hijri to Gregorian</h2>
+                        <div class="grid grid-cols-3 gap-4 mb-4">
+                            <div>
+                                <label for="hijriDay" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="day">Day</label>
+                                <input type="number" id="hijriDay" min="1" max="30" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            </div>
+                            <div>
+                                <label for="hijriMonth" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="month">Month</label>
+                                <select id="hijriMonth" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                                    <option value="1">Muharram</option>
+                                    <option value="2">Safar</option>
+                                    <option value="3">Rabi al-Awwal</option>
+                                    <option value="4">Rabi al-Thani</option>
+                                    <option value="5">Jumada al-Awwal</option>
+                                    <option value="6">Jumada al-Thani</option>
+                                    <option value="7">Rajab</option>
+                                    <option value="8">Sha'ban</option>
+                                    <option value="9">Ramadan</option>
+                                    <option value="10">Shawwal</option>
+                                    <option value="11">Dhu al-Qadah</option>
+                                    <option value="12">Dhu al-Hijjah</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="hijriYear" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1" data-i18n="year">Year</label>
+                                <input type="number" id="hijriYear" min="1300" max="1500" class="w-full p-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-gray-100">
+                            </div>
+                        </div>
+                        <button id="convertToGregorian" class="w-full bg-emerald-600 dark:bg-emerald-500 text-white px-6 py-2 rounded-lg hover:bg-emerald-700 dark:hover:bg-emerald-600 transition-colors" data-i18n="convert">Convert</button>
+                        <div id="gregorianResult" class="mt-4 p-4 bg-emerald-50 dark:bg-gray-700 rounded-lg hidden">
+                            <p class="text-center text-lg font-semibold text-emerald-800 dark:text-emerald-400"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center py-8 text-emerald-600 dark:text-emerald-400">
+            <p>&copy; 2024 IslamiCal - All rights reserved</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 

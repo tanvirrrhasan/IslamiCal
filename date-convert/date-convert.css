@@ -1,0 +1,160 @@
+:root {
+    --primary-color: #065f46;
+    --secondary-color: #047857;
+    --accent-color: #f0fdf4;
+    --text-color: #1f2937;
+    --bg-color: #f0fdf4;
+    --card-bg: #ffffff;
+    --hover-color: #d1fae5;
+    --border-color: #065f46;
+}
+
+:root.dark {
+    --primary-color: #34d399;
+    --secondary-color: #10b981;
+    --accent-color: #064e3b;
+    --text-color: #f3f4f6;
+    --bg-color: #111827;
+    --card-bg: #1f2937;
+    --hover-color: #374151;
+    --border-color: #34d399;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--bg-color);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.arabic-font {
+    font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+}
+
+.bengali-font {
+    font-family: 'Noto Sans Bengali', sans-serif;
+}
+
+/* Language Selector Styles */
+.language-selector {
+    position: relative;
+    display: inline-block;
+}
+
+#langDropdown {
+    min-width: 150px;
+    z-index: 1000;
+    background-color: var(--card-bg);
+    border: 1px solid var(--border-color);
+}
+
+.lang-option {
+    transition: background-color 0.2s;
+    color: var(--text-color);
+}
+
+.lang-option:hover {
+    background-color: var(--hover-color);
+}
+
+/* RTL Support for Arabic */
+[lang="ar"] {
+    direction: rtl;
+    text-align: right;
+}
+
+/* Font Classes for Different Languages */
+[lang="en"] {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+[lang="bn"] {
+    font-family: 'Noto Sans Bengali', sans-serif;
+}
+
+[lang="ar"] {
+    font-family: 'Amiri', 'Noto Naskh Arabic', serif;
+}
+
+/* Converter Section Styles */
+.converter-section {
+    background-color: var(--card-bg);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.converter-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Input Styles */
+input[type="number"],
+select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background-color: var(--card-bg);
+    color: var(--text-color);
+    transition: border-color 0.3s ease;
+}
+
+input[type="number"]:focus,
+select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px rgba(6, 95, 70, 0.1);
+}
+
+/* Result Display */
+#hijriResult,
+#gregorianResult {
+    background-color: var(--accent-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-top: 1rem;
+    text-align: center;
+    transition: opacity 0.3s ease;
+}
+
+#hijriResult.visible,
+#gregorianResult.visible {
+    opacity: 1;
+}
+
+/* Theme Toggle Button */
+#themeToggle {
+    position: relative;
+    overflow: hidden;
+}
+
+#themeToggle .moon-icon,
+#themeToggle .sun-icon {
+    transition: transform 0.3s ease;
+}
+
+.dark #themeToggle .moon-icon {
+    display: block;
+}
+
+.dark #themeToggle .sun-icon {
+    display: none;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .converter-section {
+        margin-bottom: 1.5rem;
+    }
+    
+    .grid-cols-3 {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .grid-cols-3 > div:last-child {
+        grid-column: span 2;
+    }
+} 

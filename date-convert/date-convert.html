@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Date Converter - IslamiCal</title>
+    <link rel="stylesheet" href="date-convert.css">
+    <link href="https://fonts.googleapis.com/css2?family=Amiri:wght@400;700&family=Noto+Naskh+Arabic:wght@400;700&family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-900 text-gray-100">
+    <div class="container mx-auto px-4">
+        <header class="text-center py-8">
+            <div class="flex justify-end mb-4 space-x-4">
+                <a href="../index.html" class="p-2 rounded-lg bg-emerald-600 hover:bg-emerald-700 text-white transition-colors">
+                    Back to Home
+                </a>
+                <div class="language-selector">
+                    <button id="langBtn" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-lg transition-colors">
+                        <span class="current-lang">English</span>
+                        <span class="ml-2">▼</span>
+                    </button>
+                    <div id="langDropdown" class="hidden absolute mt-2 bg-gray-800 rounded-lg shadow-lg">
+                        <button class="lang-option block w-full text-left px-4 py-2 hover:bg-gray-700 text-gray-200" data-lang="en">English</button>
+                        <button class="lang-option block w-full text-left px-4 py-2 hover:bg-gray-700 text-gray-200" data-lang="bn">বাংলা</button>
+                        <button class="lang-option block w-full text-left px-4 py-2 hover:bg-gray-700 text-gray-200" data-lang="ar">العربية</button>
+                    </div>
+                </div>
+            </div>
+            <h1 class="text-4xl font-bold text-emerald-400 arabic-font">Date Converter</h1>
+            <p class="text-emerald-300 mt-2" data-i18n="subtitle">Convert between Gregorian and Hijri dates</p>
+        </header>
+
+        <main class="max-w-4xl mx-auto">
+            <div class="bg-gray-800 rounded-lg shadow-lg p-6 mb-8">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Gregorian to Hijri -->
+                    <div class="converter-section">
+                        <h2 class="text-xl font-semibold text-emerald-400 mb-4" data-i18n="gregorian-to-hijri">Gregorian to Hijri</h2>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <div class="w-[31%]">
+                                <label for="gregorianDay" class="block text-xs font-medium text-gray-300 mb-1" data-i18n="day">Day</label>
+                                <select id="gregorianDay" class="w-full p-1 text-xs border border-gray-600 rounded-lg bg-gray-700 text-gray-100">
+                                    <!-- Days will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="w-[31%]">
+                                <label for="gregorianMonth" class="block text-xs font-medium text-gray-300 mb-1" data-i18n="month">Month</label>
+                                <select id="gregorianMonth" class="w-full p-1 text-xs border border-gray-600 rounded-lg bg-gray-700 text-gray-100">
+                                    <option value="1">Jan</option>
+                                    <option value="2">Feb</option>
+                                    <option value="3">Mar</option>
+                                    <option value="4">Apr</option>
+                                    <option value="5">May</option>
+                                    <option value="6">Jun</option>
+                                    <option value="7">Jul</option>
+                                    <option value="8">Aug</option>
+                                    <option value="9">Sep</option>
+                                    <option value="10">Oct</option>
+                                    <option value="11">Nov</option>
+                                    <option value="12">Dec</option>
+                                </select>
+                            </div>
+                            <div class="w-[31%]">
+                                <label for="gregorianYear" class="block text-xs font-medium text-gray-300 mb-1" data-i18n="year">Year</label>
+                                <div class="relative">
+                                    <input type="number" id="gregorianYear" class="w-full p-1 text-xs border border-gray-600 rounded-lg bg-gray-700 text-gray-100" min="1900" max="2100" placeholder="Year">
+                                    <button type="button" id="gregorianYearBtn" class="absolute right-1 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="convertToHijri" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg transition-colors" data-i18n="convert">Convert</button>
+                        <div id="hijriResult" class="mt-4 p-4 bg-gray-700 rounded-lg hidden">
+                            <p class="text-center text-lg font-semibold text-emerald-400"></p>
+                        </div>
+                    </div>
+
+                    <!-- Hijri to Gregorian -->
+                    <div class="converter-section">
+                        <h2 class="text-xl font-semibold text-emerald-400 mb-4" data-i18n="hijri-to-gregorian">Hijri to Gregorian</h2>
+                        <div class="flex flex-wrap gap-1 mb-4">
+                            <div class="w-[31%]">
+                                <label for="hijriDay" class="block text-xs font-medium text-gray-300 mb-1" data-i18n="day">Day</label>
+                                <select id="hijriDay" class="w-full p-1 text-xs border border-gray-600 rounded-lg bg-gray-700 text-gray-100">
+                                    <!-- Days will be populated by JavaScript -->
+                                </select>
+                            </div>
+                            <div class="w-[31%]">
+                                <label for="hijriMonth" class="block text-xs font-medium text-gray-300 mb-1" data-i18n="month">Month</label>
+                                <select id="hijriMonth" class="w-full p-1 text-xs border border-gray-600 rounded-lg bg-gray-700 text-gray-100">
+                                    <option value="1">Muh</option>
+                                    <option value="2">Saf</option>
+                                    <option value="3">Rab1</option>
+                                    <option value="4">Rab2</option>
+                                    <option value="5">Jum1</option>
+                                    <option value="6">Jum2</option>
+                                    <option value="7">Raj</option>
+                                    <option value="8">Sha</option>
+                                    <option value="9">Ram</option>
+                                    <option value="10">Shw</option>
+                                    <option value="11">Qad</option>
+                                    <option value="12">Hij</option>
+                                </select>
+                            </div>
+                            <div class="w-[31%]">
+                                <label for="hijriYear" class="block text-xs font-medium text-gray-300 mb-1" data-i18n="year">Year</label>
+                                <div class="relative">
+                                    <input type="number" id="hijriYear" class="w-full p-1 text-xs border border-gray-600 rounded-lg bg-gray-700 text-gray-100" min="1300" max="1500" placeholder="Year">
+                                    <button type="button" id="hijriYearBtn" class="absolute right-1 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200">
+                                        <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <button id="convertToGregorian" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg transition-colors" data-i18n="convert">Convert</button>
+                        <div id="gregorianResult" class="mt-4 p-4 bg-gray-700 rounded-lg hidden">
+                            <p class="text-center text-lg font-semibold text-emerald-400"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center py-8 text-emerald-400">
+            <p>&copy; 2024 IslamiCal - All rights reserved</p>
+        </footer>
+    </div>
+
+    <script src="date-convert.js"></script>
+</body>
+</html> 
